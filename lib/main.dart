@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'pages/login.dart';
+
 void main() {
   runApp(const EcommerceApp());
 }
@@ -10,11 +12,11 @@ class EcommerceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Ecommerce App',
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const Scaffold(),
+      home: const Login(),
     );
   }
 }
