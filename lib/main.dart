@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/pages/register.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/login.dart';
@@ -16,7 +17,7 @@ class EcommerceApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const Login(),
+      home: const Register(),
     );
   }
 }
