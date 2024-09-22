@@ -18,7 +18,7 @@ class EcommerceApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const Home(),
+      home: Home(),
     );
   }
 }

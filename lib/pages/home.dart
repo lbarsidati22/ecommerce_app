@@ -1,8 +1,10 @@
 import 'package:ecommerce_app/shared/colors_constans.dart';
 import 'package:flutter/material.dart';
 
+import '../model/item.dart';
+
 class Home extends StatelessWidget {
-  const Home({super.key});
+  Home({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +116,51 @@ class Home extends StatelessWidget {
         title: Text(
           'Home',
           style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: GridView.builder(
+          itemCount: item.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 3 / 2,
+            mainAxisSpacing: 22,
+            crossAxisSpacing: 22,
+          ),
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {},
+              child: GridTile(
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: -3,
+                      bottom: -9,
+                      right: 0,
+                      left: 0,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(55),
+                        child: Image.asset(item[index].imgPath),
+                      ),
+                    ),
+                  ],
+                ),
+                footer: GridTileBar(
+                  backgroundColor: Color(0xffcad8d5),
+                  trailing: IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.add,
+                      color: Colors.black,
+                    ),
+                  ),
+                  leading: Text('\$ 12.99'),
+                  title: Text(''),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
