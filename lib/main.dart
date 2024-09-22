@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/pages/register.dart';
+import 'package:ecommerce_app/provider/cart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'pages/deteals_screan.dart';
 import 'pages/home.dart';
@@ -14,13 +16,18 @@ class EcommerceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Ecommerce App',
-      theme: ThemeData(
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (BuildContext context) {
+        return Cart();
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Ecommerce App',
+        theme: ThemeData(
+          useMaterial3: true,
+        ),
+        home: Home(),
       ),
-      home: DetealsScrean(),
     );
   }
 }

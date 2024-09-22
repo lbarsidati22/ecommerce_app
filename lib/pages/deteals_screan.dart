@@ -1,9 +1,11 @@
+import 'package:ecommerce_app/model/item.dart';
 import 'package:flutter/material.dart';
 
 import '../shared/colors_constans.dart';
 
 class DetealsScrean extends StatefulWidget {
-  DetealsScrean({super.key});
+  Item prudact;
+  DetealsScrean({super.key, required this.prudact});
 
   @override
   State<DetealsScrean> createState() => _DetealsScreanState();
@@ -64,12 +66,12 @@ class _DetealsScreanState extends State<DetealsScrean> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset('assets/images/1.webp'),
+            Image.asset(widget.prudact.imgPath),
             SizedBox(
               height: 12,
             ),
             Text(
-              '\$12.99',
+              '\$ ${widget.prudact.price}',
               style: TextStyle(fontSize: 20),
             ),
             SizedBox(
@@ -135,7 +137,7 @@ class _DetealsScreanState extends State<DetealsScrean> {
                       width: 4,
                     ),
                     Text(
-                      'Flower shop',
+                      widget.prudact.location,
                       style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w500,

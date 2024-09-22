@@ -1,5 +1,8 @@
+import 'package:ecommerce_app/pages/deteals_screan.dart';
+import 'package:ecommerce_app/provider/cart.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../model/item.dart';
 
@@ -77,40 +80,50 @@ class Home extends StatelessWidget {
           color: Colors.white,
         ),
         actions: [
-          Stack(
-            children: [
-              Container(
-                padding: EdgeInsets.all(4),
-                child: Text(
-                  '8',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
+          Consumer<Cart>(builder: ((context, cartinstence, child) {
+            return Row(
+              children: [
+                Stack(
+                  children: [
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          color: Colors.white,
+                          Icons.add_shopping_cart,
+                        )),
+                    Positioned(
+                      top: -3,
+                      left: 3,
+                      child: Container(
+                        padding: EdgeInsets.all(4),
+                        child: Text(
+                          '${cartinstence.selectedPrudact.length}',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 12,
+                  ),
+                  child: Text(
+                    '\$ ${cartinstence.price}',
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  shape: BoxShape.circle,
-                ),
-              ),
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    color: Colors.white,
-                    Icons.add_shopping_cart,
-                  )),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 12,
-            ),
-            child: Text(
-              '\$103',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+              ],
+            );
+          })),
         ],
         backgroundColor: appbarGreen,
         title: Text(
@@ -121,7 +134,7 @@ class Home extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
         child: GridView.builder(
-          itemCount: item.length,
+          itemCount: items.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 3 / 2,
@@ -130,7 +143,16 @@ class Home extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetealsScrean(
+                      prudact: items[index],
+                    ),
+                  ),
+                );
+              },
               child: GridTile(
                 child: Stack(
                   children: [
@@ -141,20 +163,24 @@ class Home extends StatelessWidget {
                       left: 0,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(55),
-                        child: Image.asset(item[index].imgPath),
+                        child: Image.asset(items[index].imgPath),
                       ),
                     ),
                   ],
                 ),
                 footer: GridTileBar(
                   // backgroundColor: Color(0xffcad8d5),
-                  trailing: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.add,
-                      color: Colors.black,
-                    ),
-                  ),
+                  trailing: Consumer<Cart>(builder: ((context, cartt, child) {
+                    return IconButton(
+                      onPressed: () {
+                        cartt.add(items[index]);
+                      },
+                      icon: Icon(
+                        Icons.add,
+                        color: Colors.black,
+                      ),
+                    );
+                  })),
                   leading: Text('\$ 12.99'),
                   title: Text(''),
                 ),
