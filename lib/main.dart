@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/pages/register.dart';
 import 'package:flutter/material.dart';
 
+import 'pages/deteals_screan.dart';
 import 'pages/home.dart';
 import 'test/test_home.dart';
 
@@ -16,10 +17,10 @@ class EcommerceApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Ecommerce App',
-      theme: ThemeData.dark(
+      theme: ThemeData(
         useMaterial3: true,
       ),
-      home: TestHome(),
+      home: DetealsScrean(),
     );
   }
 }

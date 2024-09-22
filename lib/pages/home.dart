@@ -147,7 +147,7 @@ class Home extends StatelessWidget {
                   ],
                 ),
                 footer: GridTileBar(
-                  backgroundColor: Color(0xffcad8d5),
+                  // backgroundColor: Color(0xffcad8d5),
                   trailing: IconButton(
                     onPressed: () {},
                     icon: Icon(
