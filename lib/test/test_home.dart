@@ -1,11 +1,16 @@
 import 'package:ecommerce_app/test/test_data.dart/test_prudact.dart';
+import 'package:ecommerce_app/test/test_provider/test_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'test_details.dart';
 
 class TestHome extends StatelessWidget {
   const TestHome({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final testCarti = Provider.of<TestCart>(context);
     return Scaffold(
       drawer: Drawer(
         child: Column(
@@ -73,7 +78,9 @@ class TestHome extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.all(4),
-                child: const Text('9'),
+                child: Text(
+                  '${testCarti.testSelectedcart.length}',
+                ),
                 decoration: const BoxDecoration(
                   color: Colors.green,
                   shape: BoxShape.circle,
@@ -81,10 +88,10 @@ class TestHome extends StatelessWidget {
               ),
             ],
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(right: 10),
             child: Text(
-              '\$ 122',
+              '\$ ${testCarti.price}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
@@ -106,7 +113,16 @@ class TestHome extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (contetx) => TestDetails(
+                      detailsPrudact: myTestList[index],
+                    ),
+                  ),
+                );
+              },
               child: GridTile(
                 child: Stack(
                   children: [
@@ -124,7 +140,9 @@ class TestHome extends StatelessWidget {
                 ),
                 footer: GridTileBar(
                   trailing: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      testCarti.add(myTestList[index]);
+                    },
                     icon: Icon(
                       Icons.add,
                       color: Colors.black,
