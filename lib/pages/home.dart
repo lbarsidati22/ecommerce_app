@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:ecommerce_app/pages/checkout.dart';
 import 'package:ecommerce_app/pages/deteals_screan.dart';
 import 'package:ecommerce_app/provider/cart.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
@@ -46,7 +49,14 @@ class Home extends StatelessWidget {
                 ListTile(
                   title: const Text('My Prudact'),
                   leading: const Icon(Icons.add_shopping_cart),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Checkout(),
+                      ),
+                    );
+                  },
                 ),
                 ListTile(
                   title: const Text('about'),
