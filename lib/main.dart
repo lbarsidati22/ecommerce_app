@@ -3,6 +3,7 @@ import 'package:ecommerce_app/provider/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'pages/checkout.dart';
 import 'pages/deteals_screan.dart';
 import 'pages/home.dart';
 import 'test/test_home.dart';
@@ -26,7 +27,7 @@ class EcommerceApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: Home(),
+        home: const Checkout(),
       ),
     );
   }

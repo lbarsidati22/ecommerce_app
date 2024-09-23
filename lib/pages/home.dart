@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../model/item.dart';
+import '../shared/appbar.dart';
 
 class Home extends StatelessWidget {
-  Home({super.key});
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class Home extends StatelessWidget {
           children: [
             Column(
               children: [
-                UserAccountsDrawerHeader(
+                const UserAccountsDrawerHeader(
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/images/backgroundimage.jpg'),
@@ -38,33 +39,33 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  title: Text('Home'),
-                  leading: Icon(Icons.home),
+                  title: const Text('Home'),
+                  leading: const Icon(Icons.home),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Text('My Prudact'),
-                  leading: Icon(Icons.add_shopping_cart),
+                  title: const Text('My Prudact'),
+                  leading: const Icon(Icons.add_shopping_cart),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Text('about'),
-                  leading: Icon(
+                  title: const Text('about'),
+                  leading: const Icon(
                     Icons.help_center,
                   ),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Text('logout'),
-                  leading: Icon(
+                  title: const Text('logout'),
+                  leading: const Icon(
                     Icons.exit_to_app,
                   ),
                   onTap: () {},
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'Developed by lbar sidati 2024',
                 style: TextStyle(
@@ -77,55 +78,14 @@ class Home extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        actions: [
-          Row(
-            children: [
-              Stack(
-                children: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        color: Colors.white,
-                        Icons.add_shopping_cart,
-                      )),
-                  Positioned(
-                    top: -3,
-                    left: 3,
-                    child: Container(
-                      padding: EdgeInsets.all(4),
-                      child: Text(
-                        '${cartt.selectedPrudact.length}',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  right: 12,
-                ),
-                child: Text(
-                  '\$ ${cartt.price}',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ],
-          ),
+        actions: const [
+          PrudactAndPrice(),
         ],
         backgroundColor: appbarGreen,
-        title: Text(
+        title: const Text(
           'Home',
           style: TextStyle(color: Colors.white),
         ),
@@ -134,7 +94,7 @@ class Home extends StatelessWidget {
         padding: const EdgeInsets.only(top: 20),
         child: GridView.builder(
           itemCount: items.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 3 / 2,
             mainAxisSpacing: 22,
@@ -153,6 +113,21 @@ class Home extends StatelessWidget {
                 );
               },
               child: GridTile(
+                footer: GridTileBar(
+                  // backgroundColor: Color(0xffcad8d5),
+                  trailing: IconButton(
+                    onPressed: () {
+                      cartt.add(items[index]);
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.black,
+                    ),
+                  ),
+
+                  leading: const Text('\$ 12.99'),
+                  title: const Text(''),
+                ),
                 child: Stack(
                   children: [
                     Positioned(
@@ -166,21 +141,6 @@ class Home extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-                footer: GridTileBar(
-                  // backgroundColor: Color(0xffcad8d5),
-                  trailing: IconButton(
-                    onPressed: () {
-                      cartt.add(items[index]);
-                    },
-                    icon: Icon(
-                      Icons.add,
-                      color: Colors.black,
-                    ),
-                  ),
-
-                  leading: Text('\$ 12.99'),
-                  title: Text(''),
                 ),
               ),
             );

@@ -11,11 +11,11 @@ class Login extends StatelessWidget {
       child: Scaffold(
         body: Center(
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 64,
                 ),
                 TextField(
@@ -25,7 +25,7 @@ class Login extends StatelessWidget {
                     hintText: 'Enter your email :',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 22,
                 ),
                 TextField(
@@ -35,13 +35,13 @@ class Login extends StatelessWidget {
                     hintText: 'Enter your password :',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 22,
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
                     padding: WidgetStateProperty.all(
-                      EdgeInsets.all(12),
+                      const EdgeInsets.all(12),
                     ),
                     shape: WidgetStateProperty.all(
                       RoundedRectangleBorder(
@@ -53,7 +53,7 @@ class Login extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     'Sign in',
                     style: TextStyle(
                       color: Colors.white,

@@ -15,7 +15,7 @@ class TestHome extends StatelessWidget {
       drawer: Drawer(
         child: Column(
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/backgroundimage.jpg'),
@@ -30,25 +30,25 @@ class TestHome extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text('Home'),
-              leading: Icon(Icons.home),
+              title: const Text('Home'),
+              leading: const Icon(Icons.home),
               onTap: () {},
             ),
             ListTile(
-              title: Text('My Prudact'),
-              leading: Icon(
+              title: const Text('My Prudact'),
+              leading: const Icon(
                 Icons.add_shopping_cart,
               ),
               onTap: () {},
             ),
             ListTile(
-              title: Text('About'),
-              leading: Icon(Icons.help_center),
+              title: const Text('About'),
+              leading: const Icon(Icons.help_center),
               onTap: () {},
             ),
             ListTile(
-              title: Text('Logout'),
-              leading: Icon(Icons.logout),
+              title: const Text('Logout'),
+              leading: const Icon(Icons.logout),
               onTap: () {},
             ),
           ],
@@ -78,21 +78,21 @@ class TestHome extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.all(4),
-                child: Text(
-                  '${testCarti.testSelectedcart.length}',
-                ),
                 decoration: const BoxDecoration(
                   color: Colors.green,
                   shape: BoxShape.circle,
+                ),
+                child: Text(
+                  '${testCarti.testSelectedcart.length}',
                 ),
               ),
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: 10),
             child: Text(
               '\$ ${testCarti.price}',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -105,7 +105,7 @@ class TestHome extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: GridView.builder(
           itemCount: myTestList.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             mainAxisSpacing: 22,
             crossAxisCount: 2,
             crossAxisSpacing: 22,
@@ -124,6 +124,19 @@ class TestHome extends StatelessWidget {
                 );
               },
               child: GridTile(
+                footer: GridTileBar(
+                  trailing: IconButton(
+                    onPressed: () {
+                      testCarti.add(myTestList[index]);
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.black,
+                    ),
+                  ),
+                  leading: const Text('\$12.89'),
+                  title: const Text(''),
+                ),
                 child: Stack(
                   children: [
                     Positioned(
@@ -137,19 +150,6 @@ class TestHome extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-                footer: GridTileBar(
-                  trailing: IconButton(
-                    onPressed: () {
-                      testCarti.add(myTestList[index]);
-                    },
-                    icon: Icon(
-                      Icons.add,
-                      color: Colors.black,
-                    ),
-                  ),
-                  leading: Text('\$12.89'),
-                  title: Text(''),
                 ),
               ),
             );

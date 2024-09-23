@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const decorationTextFiled = InputDecoration(
-  focusedBorder: const OutlineInputBorder(
+  focusedBorder: OutlineInputBorder(
     borderSide: BorderSide(
       color: Colors.grey,
     ),
@@ -11,7 +11,7 @@ const decorationTextFiled = InputDecoration(
   ),
   enabledBorder: OutlineInputBorder(
     borderSide: BorderSide.none,
-    borderRadius: const BorderRadius.all(
+    borderRadius: BorderRadius.all(
       Radius.circular(12),
     ),
   ),

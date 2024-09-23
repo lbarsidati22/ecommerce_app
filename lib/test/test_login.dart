@@ -7,15 +7,15 @@ class TestLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 45, 43, 43),
+      backgroundColor: const Color.fromARGB(255, 45, 43, 43),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Sign in',
@@ -25,35 +25,35 @@ class TestLogin extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 18,
                 ),
                 TextField(
                   keyboardType: TextInputType.emailAddress,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                   decoration: textfailedDecoratins.copyWith(
                     hintText: 'enter your email',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 18,
                 ),
                 TextField(
                   keyboardType: TextInputType.text,
                   obscureText: true,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                   decoration: textfailedDecoratins.copyWith(
                     hintText: 'enter your password',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 ElevatedButton(
@@ -63,27 +63,27 @@ class TestLogin extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    backgroundColor: WidgetStatePropertyAll(
+                    backgroundColor: const WidgetStatePropertyAll(
                       Colors.green,
                     ),
                   ),
                   onPressed: () {},
-                  child: Text('Sign in'),
+                  child: const Text('Sign in'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Don\'t have an account ?',
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Text('Sign up'),
+                      child: const Text('Sign up'),
                     ),
                   ],
                 ),

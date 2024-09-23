@@ -12,12 +12,12 @@ class Register extends StatelessWidget {
       child: Scaffold(
         body: Center(
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 64,
                   ),
                   TextField(
@@ -27,7 +27,7 @@ class Register extends StatelessWidget {
                       hintText: 'Enter your nsername :',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 22,
                   ),
                   TextField(
@@ -37,7 +37,7 @@ class Register extends StatelessWidget {
                       hintText: 'Enter your email :',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 22,
                   ),
                   TextField(
@@ -47,13 +47,13 @@ class Register extends StatelessWidget {
                       hintText: 'Enter your password :',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 22,
                   ),
                   ElevatedButton(
                     style: ButtonStyle(
                       padding: WidgetStateProperty.all(
-                        EdgeInsets.all(12),
+                        const EdgeInsets.all(12),
                       ),
                       shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
@@ -65,7 +65,7 @@ class Register extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {},
-                    child: Text(
+                    child: const Text(
                       'Sign up',
                       style: TextStyle(
                         color: Colors.white,

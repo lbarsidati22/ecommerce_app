@@ -7,15 +7,15 @@ class TestRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 45, 43, 43),
+      backgroundColor: const Color.fromARGB(255, 45, 43, 43),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Sign up',
@@ -25,44 +25,44 @@ class TestRegister extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 TextField(
                   keyboardType: TextInputType.emailAddress,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                   decoration: textfailedDecoratins.copyWith(
                     hintText: 'enter your username',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 18,
                 ),
                 TextField(
                   keyboardType: TextInputType.emailAddress,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                   decoration: textfailedDecoratins.copyWith(
                     hintText: 'enter your email',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 18,
                 ),
                 TextField(
                   keyboardType: TextInputType.text,
                   obscureText: true,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                   decoration: textfailedDecoratins.copyWith(
                     hintText: 'enter your password',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 ElevatedButton(
@@ -72,20 +72,20 @@ class TestRegister extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    backgroundColor: WidgetStatePropertyAll(
+                    backgroundColor: const WidgetStatePropertyAll(
                       Colors.green,
                     ),
                   ),
                   onPressed: () {},
-                  child: Text('Sign up'),
+                  child: const Text('Sign up'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Already have an account ?',
                     ),
                     TextButton(
@@ -93,11 +93,11 @@ class TestRegister extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TestLogin(),
+                            builder: (context) => const TestLogin(),
                           ),
                         );
                       },
-                      child: Text('Sign in'),
+                      child: const Text('Sign in'),
                     ),
                   ],
                 ),
