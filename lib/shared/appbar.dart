@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/pages/checkout.dart';
 import 'package:ecommerce_app/provider/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,14 @@ class PrudactAndPrice extends StatelessWidget {
         Stack(
           children: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Checkout(),
+                    ),
+                  );
+                },
                 icon: const Icon(
                   color: Colors.white,
                   Icons.add_shopping_cart,
