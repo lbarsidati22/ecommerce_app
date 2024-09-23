@@ -11,6 +11,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartt = Provider.of<Cart>(context);
     return Scaffold(
       drawer: Drawer(
         child: Column(
@@ -80,50 +81,48 @@ class Home extends StatelessWidget {
           color: Colors.white,
         ),
         actions: [
-          Consumer<Cart>(builder: ((context, cartinstence, child) {
-            return Row(
-              children: [
-                Stack(
-                  children: [
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          color: Colors.white,
-                          Icons.add_shopping_cart,
-                        )),
-                    Positioned(
-                      top: -3,
-                      left: 3,
-                      child: Container(
-                        padding: EdgeInsets.all(4),
-                        child: Text(
-                          '${cartinstence.selectedPrudact.length}',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          shape: BoxShape.circle,
+          Row(
+            children: [
+              Stack(
+                children: [
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        color: Colors.white,
+                        Icons.add_shopping_cart,
+                      )),
+                  Positioned(
+                    top: -3,
+                    left: 3,
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      child: Text(
+                        '${cartt.selectedPrudact.length}',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                      ),
                     ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    right: 12,
                   ),
-                  child: Text(
-                    '\$ ${cartinstence.price}',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 12,
                 ),
-              ],
-            );
-          })),
+                child: Text(
+                  '\$ ${cartt.price}',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
         ],
         backgroundColor: appbarGreen,
         title: Text(
@@ -170,17 +169,16 @@ class Home extends StatelessWidget {
                 ),
                 footer: GridTileBar(
                   // backgroundColor: Color(0xffcad8d5),
-                  trailing: Consumer<Cart>(builder: ((context, cartt, child) {
-                    return IconButton(
-                      onPressed: () {
-                        cartt.add(items[index]);
-                      },
-                      icon: Icon(
-                        Icons.add,
-                        color: Colors.black,
-                      ),
-                    );
-                  })),
+                  trailing: IconButton(
+                    onPressed: () {
+                      cartt.add(items[index]);
+                    },
+                    icon: Icon(
+                      Icons.add,
+                      color: Colors.black,
+                    ),
+                  ),
+
                   leading: Text('\$ 12.99'),
                   title: Text(''),
                 ),
