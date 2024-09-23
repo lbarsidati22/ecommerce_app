@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/test/test_data.dart/test_prudact.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class TestDetails extends StatefulWidget {
   TestDetails({super.key, required this.detailsPrudact});
   TestPrudact detailsPrudact;

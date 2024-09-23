@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../shared/appbar.dart';
 import '../shared/colors_constans.dart';
 
+// ignore: must_be_immutable
 class DetealsScrean extends StatefulWidget {
   Item prudact;
   DetealsScrean({super.key, required this.prudact});

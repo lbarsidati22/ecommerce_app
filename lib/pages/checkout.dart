@@ -1,4 +1,5 @@
-import 'package:ecommerce_app/model/item.dart';
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommerce_app/provider/cart.dart';
 import 'package:ecommerce_app/shared/appbar.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
