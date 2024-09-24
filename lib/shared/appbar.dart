@@ -38,7 +38,7 @@ class PrudactAndPrice extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: Text(
-                  '${cartt.selectedPrudact.length}',
+                  '${cartt.itemCounte}',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,

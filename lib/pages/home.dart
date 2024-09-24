@@ -44,7 +44,14 @@ class Home extends StatelessWidget {
                 ListTile(
                   title: const Text('Home'),
                   leading: const Icon(Icons.home),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Home(),
+                      ),
+                    );
+                  },
                 ),
                 ListTile(
                   title: const Text('My Prudact'),
