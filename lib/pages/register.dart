@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/pages/login.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
 import 'package:ecommerce_app/shared/constants.dart';
+import 'package:ecommerce_app/shared/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -28,12 +29,14 @@ class _RegisterState extends State<Register> {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        showSnackBar(context, 'The password provided is too weak');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        showSnackBar(context, 'The account already exists for that email.');
+      } else {
+        showSnackBar(context, 'Oops something rong - please try again leter');
       }
-    } catch (e) {
-      print(e);
+    } catch (err) {
+      showSnackBar(context, err.toString());
     }
     setState(() {
       isLoading = false;
