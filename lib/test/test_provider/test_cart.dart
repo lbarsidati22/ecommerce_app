@@ -9,4 +9,10 @@ class TestCart with ChangeNotifier {
     price += testCakout.testPrice.round();
     notifyListeners();
   }
+
+  delete(TestPrudact testCakout) {
+    testSelectedcart.remove(testCakout);
+    price -= testCakout.testPrice.round();
+    notifyListeners();
+  }
 }

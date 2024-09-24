@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/firebase_options.dart';
 import 'package:ecommerce_app/provider/cart.dart';
+import 'package:ecommerce_app/test/test_home.dart';
+import 'package:ecommerce_app/test/test_provider/test_cart.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,17 +20,26 @@ class EcommerceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) {
-        return Cart();
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) {
+            return Cart();
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) {
+            return TestCart();
+          },
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ecommerce App',
-        theme: ThemeData(
+        theme: ThemeData.dark(
           useMaterial3: true,
         ),
-        home: const Home(),
+        home: const TestHome(),
       ),
     );
   }

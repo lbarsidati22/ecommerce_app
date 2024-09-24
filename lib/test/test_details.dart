@@ -1,5 +1,8 @@
 import 'package:ecommerce_app/test/test_data.dart/test_prudact.dart';
+import 'package:ecommerce_app/test/test_provider/test_cart.dart';
+import 'package:ecommerce_app/test/test_shared/test_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class TestDetails extends StatefulWidget {
@@ -28,35 +31,7 @@ class _TestDetailsState extends State<TestDetails> {
         ),
         backgroundColor: const Color(0xff1c1c22),
         actions: [
-          Stack(
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.add_shopping_cart,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(4),
-                decoration: const BoxDecoration(
-                  color: Colors.green,
-                  shape: BoxShape.circle,
-                ),
-                child: const Text('9'),
-              ),
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Text(
-              '\$ 122',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+          TestAppbar(),
         ],
       ),
       body: SingleChildScrollView(
@@ -112,8 +87,8 @@ class _TestDetailsState extends State<TestDetails> {
                 const SizedBox(
                   width: 4,
                 ),
-                const Text(
-                  'Flower shop',
+                Text(
+                  widget.detailsPrudact.testLocation,
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w500,

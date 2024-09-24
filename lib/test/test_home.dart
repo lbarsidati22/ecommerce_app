@@ -1,9 +1,11 @@
+import 'package:ecommerce_app/test/test_checkout.dart';
 import 'package:ecommerce_app/test/test_data.dart/test_prudact.dart';
 import 'package:ecommerce_app/test/test_provider/test_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'test_details.dart';
+import 'test_shared/test_appbar.dart';
 
 class TestHome extends StatelessWidget {
   const TestHome({super.key});
@@ -32,14 +34,23 @@ class TestHome extends StatelessWidget {
             ListTile(
               title: const Text('Home'),
               leading: const Icon(Icons.home),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
             ListTile(
               title: const Text('My Prudact'),
               leading: const Icon(
                 Icons.add_shopping_cart,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TestCheckout(),
+                  ),
+                );
+              },
             ),
             ListTile(
               title: const Text('About'),
@@ -54,7 +65,7 @@ class TestHome extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xff1c1c22),
       appBar: AppBar(
         title: const Text(
           'Home',
@@ -68,37 +79,7 @@ class TestHome extends StatelessWidget {
         ),
         backgroundColor: const Color(0xff1c1c22),
         actions: [
-          Stack(
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.add_shopping_cart,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(4),
-                decoration: const BoxDecoration(
-                  color: Colors.green,
-                  shape: BoxShape.circle,
-                ),
-                child: Text(
-                  '${testCarti.testSelectedcart.length}',
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Text(
-              '\$ ${testCarti.price}',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+          TestAppbar(),
         ],
       ),
       body: Padding(
@@ -134,7 +115,13 @@ class TestHome extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  leading: const Text('\$12.89'),
+                  leading: const Text(
+                    '\$12.89',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   title: const Text(''),
                 ),
                 child: Stack(
