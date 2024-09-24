@@ -1,8 +1,6 @@
 import 'package:ecommerce_app/test/test_data.dart/test_prudact.dart';
-import 'package:ecommerce_app/test/test_provider/test_cart.dart';
 import 'package:ecommerce_app/test/test_shared/test_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class TestDetails extends StatefulWidget {
@@ -30,7 +28,7 @@ class _TestDetailsState extends State<TestDetails> {
           color: Colors.white,
         ),
         backgroundColor: const Color(0xff1c1c22),
-        actions: [
+        actions: const [
           TestAppbar(),
         ],
       ),
@@ -89,7 +87,7 @@ class _TestDetailsState extends State<TestDetails> {
                 ),
                 Text(
                   widget.detailsPrudact.testLocation,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w500,
                   ),

@@ -1,11 +1,9 @@
 import 'package:ecommerce_app/firebase_options.dart';
+import 'package:ecommerce_app/pages/register.dart';
 import 'package:ecommerce_app/provider/cart.dart';
-import 'package:ecommerce_app/test/test_home.dart';
-import 'package:ecommerce_app/test/test_provider/test_cart.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'pages/home.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,26 +18,17 @@ class EcommerceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (BuildContext context) {
-            return Cart();
-          },
-        ),
-        ChangeNotifierProvider(
-          create: (BuildContext context) {
-            return TestCart();
-          },
-        ),
-      ],
+    return ChangeNotifierProvider(
+      create: (BuildContext context) {
+        return Cart();
+      },
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ecommerce App',
-        theme: ThemeData.dark(
+        theme: ThemeData(
           useMaterial3: true,
         ),
-        home: const TestHome(),
+        home: Register(),
       ),
     );
   }

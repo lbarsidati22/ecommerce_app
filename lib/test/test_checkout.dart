@@ -11,7 +11,7 @@ class TestCheckout extends StatelessWidget {
     final testcarti = Provider.of<TestCart>(context);
     return Scaffold(
       appBar: AppBar(
-        actions: [
+        actions: const [
           TestAppbar(),
         ],
       ),
@@ -38,7 +38,7 @@ class TestCheckout extends StatelessWidget {
                           onPressed: () {
                             testcarti.delete(testcarti.testSelectedcart[index]);
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.remove,
                           )),
                     ),
@@ -59,7 +59,7 @@ class TestCheckout extends StatelessWidget {
             onPressed: () {},
             child: Text(
               'Pay \$${testcarti.price}',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
               ),
             ),

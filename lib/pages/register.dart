@@ -1,10 +1,51 @@
 import 'package:ecommerce_app/pages/login.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
 import 'package:ecommerce_app/shared/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Register extends StatelessWidget {
-  const Register({super.key});
+class Register extends StatefulWidget {
+  Register({super.key});
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  bool isLoading = false;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  register() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +72,7 @@ class Register extends StatelessWidget {
                     height: 22,
                   ),
                   TextField(
+                    controller: emailController,
                     obscureText: false,
                     keyboardType: TextInputType.emailAddress,
                     decoration: decorationTextFiled.copyWith(
@@ -41,6 +83,7 @@ class Register extends StatelessWidget {
                     height: 22,
                   ),
                   TextField(
+                    controller: passwordController,
                     obscureText: true,
                     keyboardType: TextInputType.text,
                     decoration: decorationTextFiled.copyWith(
@@ -64,14 +107,20 @@ class Register extends StatelessWidget {
                         bTNgreen,
                       ),
                     ),
-                    onPressed: () {},
-                    child: const Text(
-                      'Sign up',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
+                    onPressed: () {
+                      register();
+                    },
+                    child: isLoading
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text(
+                            'Sign up',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

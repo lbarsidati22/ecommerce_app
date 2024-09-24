@@ -47,7 +47,7 @@ class TestHome extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => TestCheckout(),
+                    builder: (context) => const TestCheckout(),
                   ),
                 );
               },
@@ -65,7 +65,7 @@ class TestHome extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: Color(0xff1c1c22),
+      backgroundColor: const Color(0xff1c1c22),
       appBar: AppBar(
         title: const Text(
           'Home',
@@ -78,7 +78,7 @@ class TestHome extends StatelessWidget {
           color: Colors.white,
         ),
         backgroundColor: const Color(0xff1c1c22),
-        actions: [
+        actions: const [
           TestAppbar(),
         ],
       ),
