@@ -4,7 +4,6 @@ import 'package:ecommerce_app/shared/constants.dart';
 import 'package:ecommerce_app/shared/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
 
 class Register extends StatefulWidget {
   Register({super.key});
@@ -14,14 +13,25 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  bool showPassword = true;
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  bool isPassword8char = false;
+  onPasswordChanged(String password) {
+    isPassword8char = false;
+    setState(() {
+      if (password.contains(RegExp(r'.{8,}'))) {
+        isPassword8char = true;
+      }
+    });
+  }
+
   register() async {
     setState(() {
-      isLoading = true;
+      isLoading = false;
     });
     try {
       final credential =
@@ -63,16 +73,15 @@ class _RegisterState extends State<Register> {
               child: Form(
                 key: _formKey,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 64,
-                    ),
                     TextField(
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
                       decoration: decorationTextFiled.copyWith(
                         hintText: 'Enter your nsername :',
+                        suffixIcon: Icon(
+                          Icons.person,
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -80,10 +89,11 @@ class _RegisterState extends State<Register> {
                     ),
                     TextFormField(
                       // we return "null" when something is valid
-                      validator: (value) {
-                        return value != null && !EmailValidator.validate(value)
-                            ? "Enter a valid email"
-                            : null;
+                      validator: (email) {
+                        return email!.contains(RegExp(
+                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
+                            ? null
+                            : "Enter a valid email";
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
 
@@ -92,6 +102,9 @@ class _RegisterState extends State<Register> {
                       keyboardType: TextInputType.emailAddress,
                       decoration: decorationTextFiled.copyWith(
                         hintText: 'Enter your email :',
+                        suffixIcon: Icon(
+                          Icons.mail,
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -99,6 +112,9 @@ class _RegisterState extends State<Register> {
                     ),
                     TextFormField(
                       // we return "null" when something is valid
+                      onChanged: (password) {
+                        onPasswordChanged(password);
+                      },
                       validator: (value) {
                         return value!.length < 8
                             ? "Enter at lest 8 chareckter"
@@ -106,11 +122,156 @@ class _RegisterState extends State<Register> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: passwordController,
-                      obscureText: true,
+                      obscureText: showPassword,
                       keyboardType: TextInputType.text,
                       decoration: decorationTextFiled.copyWith(
-                        hintText: 'Enter your password :',
-                      ),
+                          hintText: 'Enter your password :',
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                showPassword = !showPassword;
+                              });
+                            },
+                            icon: Icon(
+                              showPassword
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          )),
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          child: Icon(
+                            Icons.check,
+                            color: Colors.white,
+                            size: 17,
+                          ),
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color:
+                                isPassword8char ? Colors.green : Colors.white,
+                            border: Border.all(color: Colors.grey.shade400),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text('At lest 8 chrackter'),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          child: Icon(
+                            Icons.check,
+                            color: Colors.white,
+                            size: 17,
+                          ),
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            border: Border.all(
+                              color: Colors.grey.shade400,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text('At leste 1 number'),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          child: Icon(
+                            Icons.check,
+                            color: Colors.white,
+                            size: 17,
+                          ),
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            border: Border.all(
+                              color: Colors.grey.shade400,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text('Has Uppercase'),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          child: Icon(
+                            Icons.check,
+                            color: Colors.white,
+                            size: 17,
+                          ),
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            border: Border.all(
+                              color: Colors.grey.shade400,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text('Has lowercase'),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          child: Icon(
+                            Icons.check,
+                            color: Colors.white,
+                            size: 17,
+                          ),
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            border: Border.all(
+                              color: Colors.grey.shade400,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text('Has Spacial Chrackter'),
+                      ],
                     ),
                     const SizedBox(
                       height: 22,
