@@ -20,11 +20,31 @@ class _RegisterState extends State<Register> {
   final passwordController = TextEditingController();
 
   bool isPassword8char = false;
+  bool isPasswordhas1number = false;
+  bool hasLowercase = false;
+  bool specialCharacters = false;
+  bool ishasUppercase = false;
   onPasswordChanged(String password) {
     isPassword8char = false;
+    isPasswordhas1number = false;
+    hasLowercase = false;
+    specialCharacters = false;
+    ishasUppercase = false;
     setState(() {
       if (password.contains(RegExp(r'.{8,}'))) {
         isPassword8char = true;
+      }
+      if (password.contains(RegExp(r'[0-9]'))) {
+        isPasswordhas1number = true;
+      }
+      if (password.contains(RegExp(r'[A-Z]'))) {
+        ishasUppercase = true;
+      }
+      if (password.contains(RegExp(r'[a-z]'))) {
+        hasLowercase = true;
+      }
+      if (password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+        specialCharacters = true;
       }
     });
   }
@@ -180,7 +200,9 @@ class _RegisterState extends State<Register> {
                           width: 20,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.white,
+                            color: isPasswordhas1number
+                                ? Colors.green
+                                : Colors.white,
                             border: Border.all(
                               color: Colors.grey.shade400,
                             ),
@@ -207,7 +229,7 @@ class _RegisterState extends State<Register> {
                           width: 20,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.white,
+                            color: ishasUppercase ? Colors.green : Colors.white,
                             border: Border.all(
                               color: Colors.grey.shade400,
                             ),
@@ -234,7 +256,7 @@ class _RegisterState extends State<Register> {
                           width: 20,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.white,
+                            color: hasLowercase ? Colors.green : Colors.white,
                             border: Border.all(
                               color: Colors.grey.shade400,
                             ),
@@ -261,7 +283,8 @@ class _RegisterState extends State<Register> {
                           width: 20,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.white,
+                            color:
+                                specialCharacters ? Colors.green : Colors.white,
                             border: Border.all(
                               color: Colors.grey.shade400,
                             ),
