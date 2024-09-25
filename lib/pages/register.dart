@@ -4,6 +4,7 @@ import 'package:ecommerce_app/shared/constants.dart';
 import 'package:ecommerce_app/shared/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class Register extends StatefulWidget {
   Register({super.key});
@@ -13,6 +14,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -58,91 +60,113 @@ class _RegisterState extends State<Register> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 64,
-                  ),
-                  TextField(
-                    obscureText: false,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: decorationTextFiled.copyWith(
-                      hintText: 'Enter your nsername :',
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 64,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 22,
-                  ),
-                  TextField(
-                    controller: emailController,
-                    obscureText: false,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: decorationTextFiled.copyWith(
-                      hintText: 'Enter your email :',
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 22,
-                  ),
-                  TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    keyboardType: TextInputType.text,
-                    decoration: decorationTextFiled.copyWith(
-                      hintText: 'Enter your password :',
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 22,
-                  ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      padding: WidgetStateProperty.all(
-                        const EdgeInsets.all(12),
+                    TextField(
+                      obscureText: false,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: decorationTextFiled.copyWith(
+                        hintText: 'Enter your nsername :',
                       ),
-                      shape: WidgetStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(13),
+                    ),
+                    const SizedBox(
+                      height: 22,
+                    ),
+                    TextFormField(
+                      // we return "null" when something is valid
+                      validator: (value) {
+                        return value != null && !EmailValidator.validate(value)
+                            ? "Enter a valid email"
+                            : null;
+                      },
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                      controller: emailController,
+                      obscureText: false,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: decorationTextFiled.copyWith(
+                        hintText: 'Enter your email :',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 22,
+                    ),
+                    TextFormField(
+                      // we return "null" when something is valid
+                      validator: (value) {
+                        return value!.length < 8
+                            ? "Enter at lest 8 chareckter"
+                            : null;
+                      },
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: passwordController,
+                      obscureText: true,
+                      keyboardType: TextInputType.text,
+                      decoration: decorationTextFiled.copyWith(
+                        hintText: 'Enter your password :',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 22,
+                    ),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.all(12),
+                        ),
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(13),
+                          ),
+                        ),
+                        backgroundColor: WidgetStateProperty.all(
+                          bTNgreen,
                         ),
                       ),
-                      backgroundColor: WidgetStateProperty.all(
-                        bTNgreen,
-                      ),
-                    ),
-                    onPressed: () {
-                      register();
-                    },
-                    child: isLoading
-                        ? CircularProgressIndicator(
-                            color: Colors.white,
-                          )
-                        : Text(
-                            'Sign up',
-                            style: TextStyle(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          register();
+                        } else {
+                          showSnackBar(context, 'Error');
+                        }
+                      },
+                      child: isLoading
+                          ? CircularProgressIndicator(
                               color: Colors.white,
-                              fontSize: 16,
+                            )
+                          : Text(
+                              'Sign up',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Already have an account ? '),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Login(),
-                            ),
-                          );
-                        },
-                        child: const Text('Sign in'),
-                      ),
-                    ],
-                  ),
-                ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Already have an account ? '),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Login(),
+                              ),
+                            );
+                          },
+                          child: const Text('Sign in'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
