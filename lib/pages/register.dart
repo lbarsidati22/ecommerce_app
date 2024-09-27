@@ -51,7 +51,7 @@ class _RegisterState extends State<Register> {
 
   register() async {
     setState(() {
-      isLoading = false;
+      isLoading = true;
     });
     try {
       final credential =
@@ -313,9 +313,17 @@ class _RegisterState extends State<Register> {
                           bTNgreen,
                         ),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          register();
+                          await register();
+                          if (!mounted) return;
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Login(),
+                            ),
+                          );
+                          showSnackBar(context, 'Succese');
                         } else {
                           showSnackBar(context, 'Error');
                         }
@@ -341,7 +349,7 @@ class _RegisterState extends State<Register> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Login(),
+                                builder: (context) => Login(),
                               ),
                             );
                           },

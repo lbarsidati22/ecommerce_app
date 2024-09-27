@@ -1,8 +1,36 @@
+import 'package:ecommerce_app/shared/snackbar.dart';
 import 'package:ecommerce_app/test/test_register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class TestLogin extends StatelessWidget {
+class TestLogin extends StatefulWidget {
   const TestLogin({super.key});
+
+  @override
+  State<TestLogin> createState() => _TestLoginState();
+}
+
+final testemailController = TextEditingController();
+final testpasswordController = TextEditingController();
+
+class _TestLoginState extends State<TestLogin> {
+  signIn() async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: testemailController.text,
+        password: testpasswordController.text,
+      );
+      showSnackBar(context, 'done');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        showSnackBar(context, 'No user found for that email.');
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        showSnackBar(context, 'Wrong password provided for that user.');
+        print('Wrong password provided for that user.');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +60,7 @@ class TestLogin extends StatelessWidget {
                   height: 18,
                 ),
                 TextField(
+                  controller: testemailController,
                   keyboardType: TextInputType.emailAddress,
                   style: const TextStyle(
                     color: Colors.white,
@@ -44,6 +73,7 @@ class TestLogin extends StatelessWidget {
                   height: 18,
                 ),
                 TextField(
+                  controller: testpasswordController,
                   keyboardType: TextInputType.text,
                   obscureText: true,
                   style: const TextStyle(
@@ -67,7 +97,9 @@ class TestLogin extends StatelessWidget {
                       Colors.green,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    signIn();
+                  },
                   child: const Text('Sign in'),
                 ),
                 const SizedBox(
@@ -81,7 +113,12 @@ class TestLogin extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TestRegister(),
+                          ),
+                        );
                       },
                       child: const Text('Sign up'),
                     ),

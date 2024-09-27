@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/test/test_checkout.dart';
 import 'package:ecommerce_app/test/test_data.dart/test_prudact.dart';
 import 'package:ecommerce_app/test/test_provider/test_cart.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -60,7 +61,9 @@ class TestHome extends StatelessWidget {
             ListTile(
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
-              onTap: () {},
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+              },
             ),
           ],
         ),

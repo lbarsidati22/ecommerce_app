@@ -1,6 +1,12 @@
 import 'package:ecommerce_app/firebase_options.dart';
+import 'package:ecommerce_app/pages/home.dart';
+import 'package:ecommerce_app/pages/login.dart';
 import 'package:ecommerce_app/pages/register.dart';
 import 'package:ecommerce_app/provider/cart.dart';
+import 'package:ecommerce_app/test/test_home.dart';
+import 'package:ecommerce_app/test/test_login.dart';
+import 'package:ecommerce_app/test/test_provider/test_cart.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,17 +24,34 @@ class EcommerceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) {
-        return Cart();
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) {
+            return Cart();
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) {
+            return TestCart();
+          },
+        )
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ecommerce App',
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: Register(),
+        home: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Home();
+              } else {
+                return Login();
+              }
+            }),
       ),
     );
   }

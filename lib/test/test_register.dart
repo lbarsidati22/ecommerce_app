@@ -325,7 +325,7 @@ class _TestRegisterState extends State<TestRegister> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => const TestLogin(),

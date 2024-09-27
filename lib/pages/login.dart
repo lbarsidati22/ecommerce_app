@@ -1,9 +1,43 @@
+import 'package:ecommerce_app/pages/register.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
 import 'package:ecommerce_app/shared/constants.dart';
+import 'package:ecommerce_app/shared/snackbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Login extends StatefulWidget {
+  Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final emailController = TextEditingController();
+
+  final passwordController = TextEditingController();
+
+  signIn() async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      showSnackBar(context, 'succes');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        showSnackBar(context, 'No user found for that email');
+      } else if (e.code == 'wrong-password') {
+        showSnackBar(context, 'Wrong password provided for that user.');
+      }
+    }
+  }
+
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +52,8 @@ class Login extends StatelessWidget {
                 const SizedBox(
                   height: 64,
                 ),
-                TextField(
+                TextFormField(
+                  controller: emailController,
                   obscureText: false,
                   keyboardType: TextInputType.emailAddress,
                   decoration: decorationTextFiled.copyWith(
@@ -28,7 +63,8 @@ class Login extends StatelessWidget {
                 const SizedBox(
                   height: 22,
                 ),
-                TextField(
+                TextFormField(
+                  controller: passwordController,
                   obscureText: true,
                   keyboardType: TextInputType.text,
                   decoration: decorationTextFiled.copyWith(
@@ -52,7 +88,10 @@ class Login extends StatelessWidget {
                       bTNgreen,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    await signIn();
+                    if (!mounted) return;
+                  },
                   child: const Text(
                     'Sign in',
                     style: TextStyle(
@@ -67,7 +106,12 @@ class Login extends StatelessWidget {
                     const Text('Don\'t have an account ? '),
                     TextButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Register(),
+                          ),
+                        );
                       },
                       child: const Text('Sign up'),
                     ),

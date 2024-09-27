@@ -4,6 +4,7 @@ import 'package:ecommerce_app/pages/checkout.dart';
 import 'package:ecommerce_app/pages/deteals_screan.dart';
 import 'package:ecommerce_app/provider/cart.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -77,7 +78,9 @@ class Home extends StatelessWidget {
                   leading: const Icon(
                     Icons.exit_to_app,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    FirebaseAuth.instance.signOut();
+                  },
                 ),
               ],
             ),
