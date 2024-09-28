@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommerce_app/firebase_options.dart';
 import 'package:ecommerce_app/pages/home.dart';
 import 'package:ecommerce_app/pages/login.dart';
 import 'package:ecommerce_app/pages/register.dart';
 import 'package:ecommerce_app/provider/cart.dart';
+import 'package:ecommerce_app/shared/snackbar.dart';
 import 'package:ecommerce_app/test/test_home.dart';
 import 'package:ecommerce_app/test/test_login.dart';
 import 'package:ecommerce_app/test/test_provider/test_cart.dart';
@@ -46,7 +49,15 @@ class EcommerceApp extends StatelessWidget {
         home: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return showSnackBar(context, 'Something id rong');
+              } else if (snapshot.hasData) {
                 return Home();
               } else {
                 return Login();
