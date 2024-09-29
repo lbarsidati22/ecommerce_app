@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:ecommerce_app/firebase_options.dart';
-import 'package:ecommerce_app/pages/home.dart';
 import 'package:ecommerce_app/pages/login.dart';
 import 'package:ecommerce_app/pages/verify_email.dart';
 import 'package:ecommerce_app/provider/cart.dart';

@@ -11,6 +11,18 @@ class TestCheckout extends StatelessWidget {
     final testcarti = Provider.of<TestCart>(context);
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        backgroundColor: const Color(0xff1c1c22),
+        title: const Text(
+          'CheckOut',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         actions: const [
           TestAppbar(),
         ],

@@ -20,6 +20,7 @@ class _TestDetailsState extends State<TestDetails> {
         title: const Text(
           'Details Screen',
           style: TextStyle(
+            color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),

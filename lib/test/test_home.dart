@@ -33,7 +33,9 @@ class TestHome extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: const Text('Home'),
+              title: const Text(
+                'Home',
+              ),
               leading: const Icon(Icons.home),
               onTap: () {
                 Navigator.pop(context);
@@ -74,6 +76,7 @@ class TestHome extends StatelessWidget {
           'Home',
           style: TextStyle(
             fontSize: 20,
+            color: Colors.white,
             fontWeight: FontWeight.w600,
           ),
         ),

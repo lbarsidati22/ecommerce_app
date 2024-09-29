@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommerce_app/shared/snackbar.dart';
+import 'package:ecommerce_app/test/forget_password.dart';
 import 'package:ecommerce_app/test/test_register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -83,8 +86,28 @@ class _TestLoginState extends State<TestLogin> {
                     hintText: 'enter your password',
                   ),
                 ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TestForgetPassword(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Forget password',
+                      style: TextStyle(
+                        fontSize: 16,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ),
                 const SizedBox(
-                  height: 12,
+                  height: 10,
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
@@ -100,10 +123,16 @@ class _TestLoginState extends State<TestLogin> {
                   onPressed: () {
                     signIn();
                   },
-                  child: const Text('Sign in'),
+                  child: const Text(
+                    'Sign in',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 6,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +149,13 @@ class _TestLoginState extends State<TestLogin> {
                           ),
                         );
                       },
-                      child: const Text('Sign up'),
+                      child: const Text(
+                        'Sign up',
+                        style: TextStyle(
+                          fontSize: 16,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
                     ),
                   ],
                 ),
