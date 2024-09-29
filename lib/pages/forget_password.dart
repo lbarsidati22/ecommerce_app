@@ -2,6 +2,7 @@
 
 import 'package:ecommerce_app/shared/colors_constans.dart';
 import 'package:ecommerce_app/shared/snackbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../shared/constants.dart';
@@ -17,6 +18,23 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   final emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  resetPassword() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: emailController.text);
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, 'error : ${e.code}');
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   void dispose() {
     emailController.dispose();
@@ -91,6 +109,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
+                      resetPassword();
                     } else {
                       showSnackBar(context, 'Error');
                     }
