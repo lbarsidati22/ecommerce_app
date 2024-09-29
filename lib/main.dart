@@ -3,6 +3,7 @@
 import 'package:ecommerce_app/firebase_options.dart';
 import 'package:ecommerce_app/pages/home.dart';
 import 'package:ecommerce_app/pages/login.dart';
+import 'package:ecommerce_app/pages/verify_email.dart';
 import 'package:ecommerce_app/provider/cart.dart';
 import 'package:ecommerce_app/shared/snackbar.dart';
 import 'package:ecommerce_app/test/test_provider/test_cart.dart';
@@ -55,7 +56,7 @@ class EcommerceApp extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return showSnackBar(context, 'Something id rong');
               } else if (snapshot.hasData) {
-                return Home();
+                return VerifyEmailPage();
               } else {
                 return Login();
               }
