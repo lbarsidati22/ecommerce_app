@@ -3,11 +3,8 @@
 import 'package:ecommerce_app/firebase_options.dart';
 import 'package:ecommerce_app/pages/home.dart';
 import 'package:ecommerce_app/pages/login.dart';
-import 'package:ecommerce_app/pages/register.dart';
 import 'package:ecommerce_app/provider/cart.dart';
 import 'package:ecommerce_app/shared/snackbar.dart';
-import 'package:ecommerce_app/test/test_home.dart';
-import 'package:ecommerce_app/test/test_login.dart';
 import 'package:ecommerce_app/test/test_provider/test_cart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';

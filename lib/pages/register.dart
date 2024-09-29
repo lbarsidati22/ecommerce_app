@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:ecommerce_app/pages/login.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
 import 'package:ecommerce_app/shared/constants.dart';

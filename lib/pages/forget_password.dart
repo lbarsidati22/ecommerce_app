@@ -49,6 +49,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     fontSize: 17,
                   ),
                 ),
+                SizedBox(
+                  height: 18,
+                ),
                 TextFormField(
                   // we return "null" when something is valid
                   validator: (email) {

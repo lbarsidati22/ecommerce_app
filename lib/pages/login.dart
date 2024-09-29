@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_local_variable
 
 import 'package:ecommerce_app/pages/register.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
