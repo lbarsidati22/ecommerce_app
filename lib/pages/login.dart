@@ -6,6 +6,7 @@ import 'package:ecommerce_app/shared/constants.dart';
 import 'package:ecommerce_app/shared/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'forget_password.dart';
 
@@ -62,9 +63,9 @@ class _LoginState extends State<Login> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+          child: SingleChildScrollView(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               const SizedBox(
                 height: 64,
               ),
@@ -181,7 +182,54 @@ class _LoginState extends State<Login> {
                   ),
                 ],
               ),
-            ],
+              SizedBox(
+                height: 17,
+              ),
+              SizedBox(
+                width: 299,
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Divider(
+                      thickness: 0.6,
+                      color: Colors.purple[900],
+                    )),
+                    Text(
+                      "OR",
+                      style: TextStyle(
+                        color: Colors.purple[900],
+                      ),
+                    ),
+                    Expanded(
+                        child: Divider(
+                      thickness: 0.6,
+                      color: Colors.purple[900],
+                    )),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 27),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: EdgeInsets.all(13),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.purple, width: 1),
+                        ),
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage('assets/images/8.webp'),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ]),
           ),
         ),
       ),

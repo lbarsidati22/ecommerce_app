@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
-
+import 'package:ecommerce_app/provider/google_sign_in.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ecommerce_app/firebase_options.dart';
 import 'package:ecommerce_app/pages/login.dart';
 import 'package:ecommerce_app/pages/verify_email.dart';
@@ -35,7 +36,12 @@ class EcommerceApp extends StatelessWidget {
           create: (BuildContext context) {
             return TestCart();
           },
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) {
+            return GoogleSignInProvider();
+          },
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
