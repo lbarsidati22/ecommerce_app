@@ -105,12 +105,34 @@ class _RegisterState extends State<Register> {
               child: Column(
                 children: [
                   TextField(
-                    obscureText: false,
                     keyboardType: TextInputType.emailAddress,
                     decoration: decorationTextFiled.copyWith(
                       hintText: 'Enter your nsername :',
                       suffixIcon: Icon(
                         Icons.person,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 22,
+                  ),
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: decorationTextFiled.copyWith(
+                      hintText: 'Enter your age :',
+                      suffixIcon: Icon(
+                        Icons.pest_control_rodent,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 22,
+                  ),
+                  TextField(
+                    decoration: decorationTextFiled.copyWith(
+                      hintText: 'Enter your title :',
+                      suffixIcon: Icon(
+                        Icons.person_2_outlined,
                       ),
                     ),
                   ),

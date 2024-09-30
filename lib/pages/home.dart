@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ecommerce_app/pages/Profile_page.dart';
 import 'package:ecommerce_app/pages/checkout.dart';
 import 'package:ecommerce_app/pages/deteals_screan.dart';
 import 'package:ecommerce_app/provider/cart.dart';
@@ -72,6 +73,20 @@ class Home extends StatelessWidget {
                     Icons.help_center,
                   ),
                   onTap: () {},
+                ),
+                ListTile(
+                  title: const Text('Profile Page'),
+                  leading: const Icon(
+                    Icons.person,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(),
+                      ),
+                    );
+                  },
                 ),
                 ListTile(
                   title: const Text('logout'),
