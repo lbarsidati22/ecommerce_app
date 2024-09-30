@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable
 
 import 'package:ecommerce_app/pages/register.dart';
+import 'package:ecommerce_app/provider/google_sign_in.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
 import 'package:ecommerce_app/shared/constants.dart';
 import 'package:ecommerce_app/shared/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import 'forget_password.dart';
 
@@ -49,6 +51,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final googleSignInProvider = Provider.of<GoogleSignInProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appbarGreen,
@@ -214,15 +217,20 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        googleSignInProvider.googlelogin();
+                      },
                       child: Container(
-                        padding: EdgeInsets.all(13),
+                        padding: EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.purple, width: 1),
-                        ),
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage('assets/images/8.webp'),
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.red,
+                            )),
+                        child: SvgPicture.asset(
+                          fit: BoxFit.cover,
+                          'assets/icons/google.svg',
+                          height: 29,
                         ),
                       ),
                     ),
