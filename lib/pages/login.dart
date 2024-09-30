@@ -51,6 +51,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
     final googleSignInProvider = Provider.of<GoogleSignInProvider>(context);
     return Scaffold(
       appBar: AppBar(
