@@ -1,5 +1,6 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/pages/login.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
 import 'package:ecommerce_app/shared/constants.dart';
@@ -20,6 +21,9 @@ class _RegisterState extends State<Register> {
   bool isLoading = false;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final userNameController = TextEditingController();
+  final titleController = TextEditingController();
+  final ageController = TextEditingController();
 
   bool isPassword8char = false;
   bool isPasswordhas1number = false;
@@ -61,6 +65,25 @@ class _RegisterState extends State<Register> {
         email: emailController.text,
         password: passwordController.text,
       );
+      print(credential.user!.uid);
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('userss');
+
+      users
+          .doc(credential.user!.uid)
+          .set(
+            {
+              'username': userNameController.text,
+              'age': ageController.text,
+              'title': titleController.text,
+              'email': emailController.text,
+              'pass': passwordController.text,
+            },
+            SetOptions(merge: true),
+          )
+          .then((value) =>
+              print("'full_name' & 'age' merged with existing data!"))
+          .catchError((error) => print("Failed to merge data: $error"));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         showSnackBar(context, 'The password provided is too weak');
@@ -81,6 +104,9 @@ class _RegisterState extends State<Register> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    userNameController.dispose();
+    ageController.dispose();
+    titleController.dispose();
     super.dispose();
   }
 
@@ -105,6 +131,7 @@ class _RegisterState extends State<Register> {
               child: Column(
                 children: [
                   TextField(
+                    controller: userNameController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: decorationTextFiled.copyWith(
                       hintText: 'Enter your nsername :',
@@ -117,6 +144,7 @@ class _RegisterState extends State<Register> {
                     height: 22,
                   ),
                   TextField(
+                    controller: ageController,
                     keyboardType: TextInputType.number,
                     decoration: decorationTextFiled.copyWith(
                       hintText: 'Enter your age :',
@@ -129,6 +157,7 @@ class _RegisterState extends State<Register> {
                     height: 22,
                   ),
                   TextField(
+                    controller: titleController,
                     decoration: decorationTextFiled.copyWith(
                       hintText: 'Enter your title :',
                       suffixIcon: Icon(

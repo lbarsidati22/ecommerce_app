@@ -1,8 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
 
 import 'package:ecommerce_app/shared/colors_constans.dart';
+import 'package:ecommerce_app/shared/data_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -14,6 +16,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    final credential = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -70,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Email :',
+                  'Email : ${credential!.email}',
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -79,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 11,
                 ),
                 Text(
-                  'Created date :',
+                  'Created date : ${DateFormat("MMM d, y").format(credential.metadata.creationTime!)}',
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -88,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 11,
                 ),
                 Text(
-                  'Last signed in :',
+                  'Last signed in :  ${DateFormat("MMM d, y").format(credential.metadata.lastSignInTime!)}',
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -112,6 +115,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
+            ),
+            GetDataFirestor(
+              documentId: credential.uid,
             ),
           ],
         ),
