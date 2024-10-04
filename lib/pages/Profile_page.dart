@@ -70,6 +70,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 16,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -102,6 +105,34 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(
                 height: 16,
               ),
+              Align(
+                alignment: Alignment.center,
+                child: TextButton(
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    backgroundColor: WidgetStateProperty.all(
+                      Colors.red,
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      credential.delete();
+                      Navigator.pop(context);
+                    });
+                  },
+                  child: Text(
+                    'Delete user',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
               Center(
                 child: Container(
                   padding: EdgeInsets.all(11),
@@ -116,6 +147,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 16,
               ),
               GetDataFirestor(
                 documentId: credential.uid,

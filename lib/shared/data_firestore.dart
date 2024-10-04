@@ -111,13 +111,29 @@ class _GetDataFirestorState extends State<GetDataFirestor> {
                         fontSize: 18,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        myShowDialog(data, 'username');
-                      },
-                      icon: Icon(
-                        Icons.edit,
-                      ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              users
+                                  .doc(credential!.uid)
+                                  .update({"username": FieldValue.delete()});
+                            });
+                          },
+                          icon: Icon(
+                            Icons.delete,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            myShowDialog(data, 'username');
+                          },
+                          icon: Icon(
+                            Icons.edit,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -205,6 +221,33 @@ class _GetDataFirestorState extends State<GetDataFirestor> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    style: ButtonStyle(
+                      shape: WidgetStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      backgroundColor: WidgetStateProperty.all(
+                        Colors.red,
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        users.doc(credential!.uid).delete();
+                      });
+                    },
+                    child: Text(
+                      'Delete data',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 ),
               ],
             ),
