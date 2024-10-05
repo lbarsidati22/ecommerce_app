@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:ecommerce_app/pages/home.dart';
 import 'package:ecommerce_app/provider/google_sign_in.dart';
-import 'package:ecommerce_app/test/test_home.dart';
-import 'package:ecommerce_app/test/test_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ecommerce_app/firebase_options.dart';
 import 'package:ecommerce_app/pages/login.dart';
@@ -50,7 +48,7 @@ class EcommerceApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ecommerce App',
-        theme: ThemeData.dark(
+        theme: ThemeData(
           useMaterial3: true,
         ),
         home: StreamBuilder(
@@ -65,10 +63,10 @@ class EcommerceApp extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return showSnackBar(context, 'Something id rong');
               } else if (snapshot.hasData) {
-                return TestHome();
+                return Home();
                 // return VerifyEmailPage();
               } else {
-                return TestLogin();
+                return Login();
               }
             }),
       ),

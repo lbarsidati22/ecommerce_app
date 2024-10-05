@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:ecommerce_app/shared/colors_constans.dart';
 import 'package:ecommerce_app/shared/data_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -14,6 +17,22 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  File? imgPath;
+  uploadImage2Screen() async {
+    final pickedImg = await ImagePicker().pickImage(source: ImageSource.camera);
+    try {
+      if (pickedImg != null) {
+        setState(() {
+          imgPath = File(pickedImg.path);
+        });
+      } else {
+        print("NO img selected");
+      }
+    } catch (e) {
+      print("Error => $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final credential = FirebaseAuth.instance.currentUser;
@@ -55,6 +74,51 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Center(
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.green,
+                  ),
+                  child: Stack(
+                    children: [
+                      imgPath == null
+                          ? CircleAvatar(
+                              // child: Image.file(imgPath!),
+                              backgroundColor: Colors.grey,
+                              radius: 75,
+                              backgroundImage:
+                                  AssetImage('assets/images/avatar.png'),
+                            )
+                          : ClipOval(
+                              child: Image.file(
+                                imgPath!,
+                                width: 145,
+                                height: 145,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                      Positioned(
+                        left: 100,
+                        right: -15,
+                        bottom: -10,
+                        child: IconButton(
+                          onPressed: () {
+                            uploadImage2Screen();
+                          },
+                          icon: Icon(
+                            Icons.add_a_photo,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
               Center(
                 child: Container(
                   padding: EdgeInsets.all(11),
