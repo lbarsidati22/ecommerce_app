@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, prefer_const_constructors
+// ignore_for_file: unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:io';
 
@@ -104,8 +104,85 @@ class _RegisterState extends State<Register> {
     });
   }
 
-  uploadImage2Screen() async {
-    final pickedImg = await ImagePicker().pickImage(source: ImageSource.camera);
+  showButtomSheet() {
+    return showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.all(22),
+          height: 200,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () async {
+                  await uploadImage2Screen(ImageSource.camera);
+                  Navigator.pop(context);
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.camera_alt,
+                      size: 30,
+                    ),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    Text(
+                      'From Camera',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 22,
+              ),
+              GestureDetector(
+                onTap: () async {
+                  await uploadImage2Screen(ImageSource.gallery);
+                  Navigator.pop(context);
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.photo_outlined,
+                      size: 30,
+                    ),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    Text(
+                      'From Galery',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 22,
+              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(fontSize: 22),
+                  ))
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  uploadImage2Screen(ImageSource source) async {
+    final pickedImg = await ImagePicker().pickImage(source: source);
     try {
       if (pickedImg != null) {
         setState(() {
@@ -179,7 +256,7 @@ class _RegisterState extends State<Register> {
                           bottom: -10,
                           child: IconButton(
                             onPressed: () {
-                              uploadImage2Screen();
+                              showButtomSheet();
                             },
                             icon: Icon(
                               Icons.add_a_photo,
