@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/test/test_login.dart';
 import 'package:ecommerce_app/test/test_shared/test_appbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +16,9 @@ bool isLoading = false;
 bool isShowPassword = true;
 final testemailController = TextEditingController();
 final testpasswordController = TextEditingController();
+final testUserNmaeController = TextEditingController();
+final testAgeController = TextEditingController();
+final testTitleController = TextEditingController();
 final _formKey = GlobalKey<FormState>();
 
 class _TestRegisterState extends State<TestRegister> {
@@ -28,6 +32,20 @@ class _TestRegisterState extends State<TestRegister> {
         email: testemailController.text,
         password: testpasswordController.text,
       );
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('usersTest');
+
+      users
+          .doc(credential.user!.uid)
+          .set({
+            'username': testUserNmaeController.text,
+            'age': testAgeController.text,
+            'title': testTitleController.text,
+            'email': testemailController.text,
+            'password': testpasswordController.text,
+          })
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         testshowSnackBar(context, 'The password provided is too weak.');
@@ -50,14 +68,6 @@ class _TestRegisterState extends State<TestRegister> {
         testisPassword8char = true;
       }
     });
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    testemailController.dispose();
-    testpasswordController.dispose();
-    super.dispose();
   }
 
   @override
@@ -87,6 +97,7 @@ class _TestRegisterState extends State<TestRegister> {
                     height: 12,
                   ),
                   TextFormField(
+                    controller: testUserNmaeController,
                     keyboardType: TextInputType.emailAddress,
                     style: const TextStyle(
                       color: Colors.white,
@@ -96,6 +107,32 @@ class _TestRegisterState extends State<TestRegister> {
                       suffixIcon: Icon(
                         Icons.person,
                       ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  TextField(
+                    controller: testAgeController,
+                    keyboardType: TextInputType.number,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: textfailedDecoratins.copyWith(
+                      hintText: 'enter your age',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  TextField(
+                    controller: testTitleController,
+                    keyboardType: TextInputType.text,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: textfailedDecoratins.copyWith(
+                      hintText: 'enter your title',
                     ),
                   ),
                   const SizedBox(

@@ -1,3 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:ecommerce_app/pages/Profile_page.dart';
+import 'package:ecommerce_app/test/profile_page.dart';
 import 'package:ecommerce_app/test/test_checkout.dart';
 import 'package:ecommerce_app/test/test_data.dart/test_prudact.dart';
 import 'package:ecommerce_app/test/test_provider/test_cart.dart';
@@ -59,6 +63,18 @@ class TestHome extends StatelessWidget {
               title: const Text('About'),
               leading: const Icon(Icons.help_center),
               onTap: () {},
+            ),
+            ListTile(
+              title: const Text('Profile'),
+              leading: const Icon(Icons.person),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TestProfilePage(),
+                  ),
+                );
+              },
             ),
             ListTile(
               title: const Text('Logout'),
