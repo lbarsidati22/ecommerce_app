@@ -85,7 +85,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       imgPath == null
                           ? CircleAvatar(
-                              // child: Image.file(imgPath!),
                               backgroundColor: Colors.grey,
                               radius: 75,
                               backgroundImage:
