@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommerce_app/test/test_provider/test_cart.dart';
 import 'package:ecommerce_app/test/test_shared/test_appbar.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, avoid_print, use_build_context_synchronously, sort_child_properties_last
 
 import 'dart:io';
 

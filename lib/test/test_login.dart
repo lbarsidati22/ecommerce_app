@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print, unused_local_variable
 
 import 'package:ecommerce_app/shared/snackbar.dart';
 import 'package:ecommerce_app/test/forget_password.dart';

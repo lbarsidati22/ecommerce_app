@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, use_super_parameters
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, use_super_parameters, use_build_context_synchronously
 
 import 'dart:async';
 
@@ -22,7 +22,6 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
 
@@ -62,7 +61,6 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     timer?.cancel();
     super.dispose();
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, prefer_const_constructors, sort_child_properties_last
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/test/test_login.dart';
 import 'package:ecommerce_app/test/test_shared/test_appbar.dart';

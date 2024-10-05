@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ecommerce_app/pages/Profile_page.dart';
 import 'package:ecommerce_app/test/profile_page.dart';
 import 'package:ecommerce_app/test/test_checkout.dart';
 import 'package:ecommerce_app/test/test_data.dart/test_prudact.dart';

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable
+// ignore_for_file: prefer_const_constructors, unused_local_variable, prefer_const_constructors_in_immutables, use_build_context_synchronously, annotate_overrides
 
 import 'package:ecommerce_app/pages/register.dart';
 import 'package:ecommerce_app/provider/google_sign_in.dart';
