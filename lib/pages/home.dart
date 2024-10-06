@@ -5,6 +5,7 @@ import 'package:ecommerce_app/pages/checkout.dart';
 import 'package:ecommerce_app/pages/deteals_screan.dart';
 import 'package:ecommerce_app/provider/cart.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
+import 'package:ecommerce_app/shared/user_imag_firestor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,10 +33,7 @@ class Home extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  currentAccountPicture: CircleAvatar(
-                    radius: 55,
-                    backgroundImage: AssetImage("assets/images/lbar.jpg"),
-                  ),
+                  currentAccountPicture: UserImag(),
                   accountName: Text(
                     'Lbar sidati',
                   ),

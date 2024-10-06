@@ -1,7 +1,7 @@
-// ignore_for_file: unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, avoid_print, use_build_context_synchronously, sort_child_properties_last
+// ignore_for_file: unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, avoid_print, use_build_context_synchronously, sort_child_properties_last, unused_import
 
 import 'dart:io';
-
+import 'package:path/path.dart' show basename;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/pages/login.dart';
 import 'package:ecommerce_app/shared/colors_constans.dart';
@@ -10,6 +10,7 @@ import 'package:ecommerce_app/shared/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class Register extends StatefulWidget {
   Register({super.key});
@@ -28,6 +29,7 @@ class _RegisterState extends State<Register> {
   final titleController = TextEditingController();
   final ageController = TextEditingController();
   File? imgPath;
+  String? imgName;
 
   bool isPassword8char = false;
   bool isPasswordhas1number = false;
@@ -69,6 +71,9 @@ class _RegisterState extends State<Register> {
         email: emailController.text,
         password: passwordController.text,
       );
+      final storageRef = FirebaseStorage.instance.ref(imgName);
+      await storageRef.putFile(imgPath!);
+      String url = await storageRef.getDownloadURL();
       print(credential.user!.uid);
       CollectionReference users =
           FirebaseFirestore.instance.collection('userss');
@@ -77,6 +82,7 @@ class _RegisterState extends State<Register> {
           .doc(credential.user!.uid)
           .set(
             {
+              'imgLink': url,
               'username': userNameController.text,
               'age': ageController.text,
               'title': titleController.text,
@@ -187,6 +193,8 @@ class _RegisterState extends State<Register> {
       if (pickedImg != null) {
         setState(() {
           imgPath = File(pickedImg.path);
+          imgName = basename(pickedImg.path);
+          print(imgName);
         });
       } else {
         print("NO img selected");
@@ -513,7 +521,9 @@ class _RegisterState extends State<Register> {
                       ),
                     ),
                     onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
+                      if (_formKey.currentState!.validate() &&
+                          imgName != null &&
+                          imgPath != null) {
                         await register();
                         if (!mounted) return;
                         Navigator.pushReplacement(

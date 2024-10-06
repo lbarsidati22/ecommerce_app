@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:ecommerce_app/shared/colors_constans.dart';
 import 'package:ecommerce_app/shared/data_firestore.dart';
+import 'package:ecommerce_app/shared/user_imag_firestor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -84,12 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Stack(
                     children: [
                       imgPath == null
-                          ? CircleAvatar(
-                              backgroundColor: Colors.grey,
-                              radius: 75,
-                              backgroundImage:
-                                  AssetImage('assets/images/avatar.png'),
-                            )
+                          ? UserImag()
                           : ClipOval(
                               child: Image.file(
                                 imgPath!,
