@@ -48,7 +48,7 @@ class EcommerceApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ecommerce App',
-        theme: ThemeData.dark(
+        theme: ThemeData(
           useMaterial3: true,
         ),
         home: StreamBuilder(
@@ -63,10 +63,10 @@ class EcommerceApp extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return showSnackBar(context, 'Something id rong');
               } else if (snapshot.hasData) {
-                return TestHome();
+                return Home();
                 // return VerifyEmailPage();
               } else {
-                return TestLogin();
+                return Login();
               }
             }),
       ),
