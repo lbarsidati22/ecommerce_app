@@ -1,10 +1,15 @@
-// ignore_for_file: avoid_print, prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: avoid_print, prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables
+
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/test/test_login.dart';
 import 'package:ecommerce_app/test/test_shared/test_appbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' show basename;
 
 class TestRegister extends StatefulWidget {
   const TestRegister({super.key});
@@ -22,6 +27,8 @@ final testUserNmaeController = TextEditingController();
 final testAgeController = TextEditingController();
 final testTitleController = TextEditingController();
 final _formKey = GlobalKey<FormState>();
+File? imgPath;
+String? imgName;
 
 class _TestRegisterState extends State<TestRegister> {
   register() async {
@@ -34,12 +41,16 @@ class _TestRegisterState extends State<TestRegister> {
         email: testemailController.text,
         password: testpasswordController.text,
       );
+      final storagRef = FirebaseStorage.instance.ref(imgName);
+      await storagRef.putFile(imgPath!);
+      String url = await storagRef.getDownloadURL();
       CollectionReference users =
           FirebaseFirestore.instance.collection('usersTest');
 
       users
           .doc(credential.user!.uid)
           .set({
+            'imgUrl': url,
             'username': testUserNmaeController.text,
             'age': testAgeController.text,
             'title': testTitleController.text,
@@ -63,6 +74,22 @@ class _TestRegisterState extends State<TestRegister> {
     });
   }
 
+  uploadImage2screen(ImageSource source) async {
+    final pickedimg = await ImagePicker().pickImage(source: source);
+    try {
+      if (pickedimg != null) {
+        setState(() {
+          imgPath = File(pickedimg.path);
+          imgName = basename(pickedimg.path);
+        });
+      } else {
+        print('No img selected');
+      }
+    } catch (e) {
+      print('Error => $e');
+    }
+  }
+
   testonPasswordchanged(String password) {
     testisPassword8char = false;
     setState(() {
@@ -75,6 +102,15 @@ class _TestRegisterState extends State<TestRegister> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff2e2b2b),
+        title: Text(
+          'Register',
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
       backgroundColor: const Color.fromARGB(255, 45, 43, 43),
       body: Center(
         child: Padding(
@@ -85,18 +121,104 @@ class _TestRegisterState extends State<TestRegister> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Sign up',
-                      style: TextStyle(
-                        fontSize: 21,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
                   const SizedBox(
                     height: 12,
+                  ),
+                  Stack(
+                    children: [
+                      imgPath == null
+                          ? CircleAvatar(
+                              radius: 75,
+                              backgroundColor: Color(0xff2e2b2b),
+                              backgroundImage: AssetImage(
+                                'assets/images/user.png',
+                              ),
+                            )
+                          : ClipOval(
+                              child: Image.file(
+                                imgPath!,
+                                width: 145,
+                                height: 145,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                      Positioned(
+                        bottom: -10,
+                        left: 99,
+                        right: -10,
+                        child: IconButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                    padding: EdgeInsets.all(15),
+                                    height: 200,
+                                    child: Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () async {
+                                            await uploadImage2screen(
+                                                ImageSource.camera);
+                                            Navigator.pop(context);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.camera_alt,
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                'from Camera',
+                                                style: TextStyle(
+                                                  fontSize: 17,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        GestureDetector(
+                                          onTap: () async {
+                                            await uploadImage2screen(
+                                                ImageSource.gallery);
+                                            Navigator.pop(context);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.grading,
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                'from Galery',
+                                                style: TextStyle(
+                                                  fontSize: 17,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                });
+                          },
+                          icon: Icon(
+                            Icons.camera_alt,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
                   ),
                   TextFormField(
                     controller: testUserNmaeController,

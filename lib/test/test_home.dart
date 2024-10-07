@@ -4,6 +4,7 @@ import 'package:ecommerce_app/test/profile_page.dart';
 import 'package:ecommerce_app/test/test_checkout.dart';
 import 'package:ecommerce_app/test/test_data.dart/test_prudact.dart';
 import 'package:ecommerce_app/test/test_provider/test_cart.dart';
+import 'package:ecommerce_app/test/test_shared/test_user_imag.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,10 +31,7 @@ class TestHome extends StatelessWidget {
               ),
               accountName: Text('Lbar Sidati'),
               accountEmail: Text('Lbar@gmail.com'),
-              currentAccountPicture: CircleAvatar(
-                radius: 33,
-                backgroundImage: AssetImage('assets/images/lbar.jpg'),
-              ),
+              currentAccountPicture: TestUserImag(),
             ),
             ListTile(
               title: const Text(

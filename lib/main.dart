@@ -6,6 +6,8 @@ import 'package:ecommerce_app/firebase_options.dart';
 import 'package:ecommerce_app/pages/login.dart';
 import 'package:ecommerce_app/provider/cart.dart';
 import 'package:ecommerce_app/shared/snackbar.dart';
+import 'package:ecommerce_app/test/test_home.dart';
+import 'package:ecommerce_app/test/test_login.dart';
 import 'package:ecommerce_app/test/test_provider/test_cart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -46,7 +48,7 @@ class EcommerceApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ecommerce App',
-        theme: ThemeData(
+        theme: ThemeData.dark(
           useMaterial3: true,
         ),
         home: StreamBuilder(
@@ -61,10 +63,10 @@ class EcommerceApp extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return showSnackBar(context, 'Something id rong');
               } else if (snapshot.hasData) {
-                return Home();
+                return TestHome();
                 // return VerifyEmailPage();
               } else {
-                return Login();
+                return TestLogin();
               }
             }),
       ),
